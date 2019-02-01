@@ -23,12 +23,15 @@ such sets/paths.
 
 public class ComputeBinomialCoefficients {
   
-  public static int MAXN = 100;
+  private static int maxNumber = 100;
   
   public static void main(String[] args) {
-    printBinomialCoefficients(4, 2);  // What are the possible ways to choose 2 committee member from 4 people
-    printBinomialCoefficients(8, 5);  // What are the possible ways to choose 5 committee member from 8 people OR 
-    // In 5x3 matrix, what are the ways you can only move downward and right to reach the lower-left from upper-right.
+    printBinomialCoefficients(4, 2);  
+    // What are the possible ways to choose 2 committee member from 4 people
+    printBinomialCoefficients(8, 5);  
+    // What are the possible ways to choose 5 committee member from 8 people OR 
+    // In 5x3 matrix, what are the ways you can only move downward 
+    //and right to reach the lower-left from upper-right.
   }
   
   public static void printBinomialCoefficients(int n, int m) {
@@ -40,8 +43,8 @@ public class ComputeBinomialCoefficients {
       return;
     }
     
-    long binomialCoefficient[][] = new long[ComputeBinomialCoefficients.MAXN][ComputeBinomialCoefficients.MAXN];
-    
+    long[][] binomialCoefficient = new long[ComputeBinomialCoefficients.maxNumber]
+        [ComputeBinomialCoefficients.maxNumber];
     
     /*
      * The below code basically constructs
@@ -55,20 +58,23 @@ public class ComputeBinomialCoefficients {
      * which is nothing but Pascal Triangle. It only fills up half of the matrix
      */
     
-    for(i = 0; i <= n; i++) {
+    for (i = 0; i <= n; i++) {
       binomialCoefficient[i][0] = 1; // 0 ways to choose is empty set, which is one.
     }
     
     for (j = 0; j <= n; j++) {
-      binomialCoefficient[j][j] = 1; // n ways to choose from n possibilities is complete set; which is one.
+      binomialCoefficient[j][j] = 1; 
+      // n ways to choose from n possibilities is complete set; which is one.
     }
     
     for (i = 1; i <= n; i++) {
       for (j = 1; j < i; j++) {
-        binomialCoefficient[i][j] = binomialCoefficient[i-1][j-1] + binomialCoefficient[i-1][j];
+        binomialCoefficient[i][j] = binomialCoefficient[i-1][j-1] 
+            + binomialCoefficient[i-1][j];
       }
     }
     
-    System.out.println("Binomial Coefficient for " + n + " and " + m + " is :" + binomialCoefficient[n][m]);
+    System.out.println("Binomial Coefficient for " + n + 
+        " and " + m + " is :" + binomialCoefficient[n][m]);
   }
 }
